@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import sessionmaker
-from models import Base, Produto  # Importe o MODELO 'Produto', não a lista
+from models import Base, Produto, Usuario  # Importe o MODELO 'Produto', não a lista
 
 # --- Configuração da Sessão (Necessário para este script rodar) ---
 engine = create_engine('sqlite:///exercicios.db')
@@ -23,3 +23,8 @@ with Session() as session:
     for produto_obj in lista_de_produtos:
         # Imprime o objeto, usando o método __str__ que definimos
         print(produto_obj)
+
+with Session() as session:
+    query.select(Usuario).where(Usuario.idade > 18)
+
+
