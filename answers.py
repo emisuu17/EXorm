@@ -1,6 +1,6 @@
-from sqlalchemy import create_engine, select
+from sqlalchemy import create_engine, select,func
 from sqlalchemy.orm import sessionmaker
-from models import Base, Produto, Usuario  # Importe o MODELO 'Produto', não a lista
+from models import Base, Produto, Usuario, Pedido  # Importe o MODELO 'Produto', não a lista
 
 # --- Configuração da Sessão (Necessário para este script rodar) ---
 engine = create_engine('sqlite:///exercicios.db')
@@ -25,6 +25,29 @@ with Session() as session:
         print(produto_obj)
 
 with Session() as session:
-    query.select(Usuario).where(Usuario.idade > 18)
+    query = select(Usuario).where(Usuario.ativo)
+    idade = session.execute(query).scalars()
 
+    for idade_obj in idade:
+        print(idade_obj)
+
+with Session() as session:
+    query = select(Pedido).where(Pedido.quantidade > 5)
+    pedidos = session.execute(query).scalars()
+
+    for pedido_obj in pedidos:
+        print(pedido_obj)
+
+
+ # --- questão 4 ---
+with Session() as session:
+    query = select(Usuario).where(Usuario.id)
+    Usu = session.execute(query).scalars().first()
+
+    if Usu:
+        print(f'primeiro usuario: {Usu.nome},id:{Usu.id}')
+    
+    else:
+        print('não encontrado')
+  
 
