@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine, select,desc,distinct,func,exists
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
-from models import Base, Produto, Usuario, Pedido  # Importe o MODELO 'Produto', não a lista
+from models import Base, Produto, Usuario, Pedido 
 
-# --- Configuração da Sessão (Necessário para este script rodar) ---
+
 engine = create_engine('sqlite:///exercicios.db')
 Session = sessionmaker(bind=engine)
 # ----------------------------------------------------------------
@@ -568,7 +568,7 @@ with Session() as session:
     else:
         print("Não, nenhum pedido 'pendente' de usuário 'inativo' foi encontrado.")
 
-print("--- 37. (Equivalente a add_columns) Retorne o nome e a idade de todos os usuários. ---")
+print("--- 37. Retorne o nome e a idade de todos os usuários. ---")
 
 with Session() as session:
    
